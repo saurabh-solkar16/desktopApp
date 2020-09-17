@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShoppingList</title>
+<link rel="stylesheet" href="./node_modules/electron-tabs/electron-tabs.css">
+      <link rel="stylesheet" href="./main.css">
+
+</head>
+<body oncontextmenu="return false">
+  <h1>Desktop</h1>
+  <div class="etabs-tabgroup">
+  <div class="etabs-tabs"></div>
+  <div class="etabs-buttons"></div>
+</div>
+<div class="etabs-views"></div>
+  <ul></ul>
+
+  <script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+    const ul = document.querySelector('ul');
+    const $ = require('jquery')
+
+    ipcRenderer.on('item:add', function(e, item){
+      ul.className = 'collection';
+      const li = document.createElement('li');
+      li.className = 'collection-item';
+      const itemText = document.createTextNode(item);
+
+      li.appendChild(itemText);
+      ul.appendChild(li);
+    });
+
+    ipcRenderer.on('item:clear', function(){
+      ul.className = '';
+      ul.innerHTML = '';
+    });
+
+    ul.addEventListener('dblclick', removeItem);
+
+    function removeItem(e){
+      event.target.remove();
+      if(ul.children.length == 0){
+        ul.className = '';
+      }
+    }
+
+    const TabGroup = require("electron-tabs");
+
+    let tabGroup = new TabGroup({newTab:{
+  title: "Google ",
+  src: "http://google.com",
+  visible: true
+}});
+
+let tab = tabGroup.addTab({
+  title: "Electron",
+  src: "http://electron.atom.io",
+  visible: true
+});
+function addNew(){
+let tab = tabGroup.addTab({
+  title: "Electron",
+  src: "http://electron.atom.io",
+  visible: true
+});
+}
+
+
+
+       
+$(document).ready(function () {
+     $(window).keyup(function (e) {
+       console.log(e.keyCode)
+         if (e.keyCode == 42) {
+           //$("body").hide();
+           document.getElementsByTagName("BODY")[0].style.display = "none";
+            //alert("print key")
+         }
+
+     });
+ });
+ 
+ setInterval(function(){ 
+   //$("body").show();
+   document.getElementsByTagName("BODY")[0].style.display = "block";
+   
+   },3000)
+        function Disable_Control_C() {
+         var keystroke = String.fromCharCode(event.keyCode).toLowerCase();
+
+         if (event.ctrlKey && (keystroke == 'c' || keystroke == 'a')) {
+             event.returnValue = false; // disable Ctrl+C
+         }
+     }
+
+
+/*$(window).keyup(function(e){
+   e.preventDefault();
+  if(e.keyCode == 44||e.keyCode == 42){
+    //stopPrntScr();
+         setTimeout(1500)
+      $('html, body').css('display', 'none'); 
+     
+       
+return false;      
+
+  }else{
+        setTimeout(1500)
+      $('html, body').css('display', 'block'); 
+     
+       
+return false;      
+
+  }
+  /*  if(e.ctrlKey && e.keyCode == 80){
+        setTimeout(1500)
+      $('html, body').css('display', 'none'); 
+       
+        e.preventDefault();
+      
+
+       
+     
+    }
+     $('html, body').css('display', 'block'); */
+  
+//})
+
+
+
+
+  </script>
+</body>
+</html>
