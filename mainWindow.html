@@ -17,7 +17,7 @@
 
   <script>
     const electron = require('electron');
-    const {ipcRenderer} = electron;
+    const {ipcRenderer,remote} = electron;
     const ul = document.querySelector('ul');
     const $ = require('jquery')
 
@@ -74,18 +74,17 @@ $(document).ready(function () {
        console.log(e.keyCode)
          if (e.keyCode == 42) {
            //$("body").hide();
-           document.getElementsByTagName("BODY")[0].style.display = "none";
+           //ipcRenderer.send('printscreendetected', 'ping')
+           remote.BrowserWindow.getFocusedWindow().minimize();
+           
+        //   document.getElementsByTagName("BODY")[0].style.display = "none";
             //alert("print key")
          }
 
      });
  });
  
- setInterval(function(){ 
-   //$("body").show();
-   document.getElementsByTagName("BODY")[0].style.display = "block";
-   
-   },3000)
+
         function Disable_Control_C() {
          var keystroke = String.fromCharCode(event.keyCode).toLowerCase();
 

@@ -14,8 +14,8 @@ let addWindow;
 
 
 app.on('ready', function(){
-  // Create new window
-  mainWindow = new BrowserWindow({alwaysOnTop:true,kiosk:true});
+  // Create new window,kiosk:true
+  mainWindow = new BrowserWindow({alwaysOnTop:true});
 
   // Load html in window
   mainWindow.loadURL(url.format({
@@ -28,31 +28,51 @@ app.on('ready', function(){
     app.quit();
   });
 
-  app.on('desktop-capturer-get-sources',function(){
-    console.log("desktop-capturer-get-sources")
-  })
 
+
+
+  ipcMain.on('printscreendetected', (event, arg) => {
+    console.log("minimize screen")
+ mainMenu.minimize();
+  })
   // Build menu from template
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
   // Insert menu
   Menu.setApplicationMenu(mainMenu);
- 
+  // globalShortcut.register('Alt', function(){
+  //   console.log("shortcut")
+  //   return false;
+  // })
+
   globalShortcut.register('Alt+Tab', function(){
     console.log("shortcut")
     return false;
   })
   globalShortcut.register('printscreen', function(){
-    console.log("shortcut")
-    setTimeout(1500)
-    return false;
+    console.log("minimize when printscreen")
+    mainWindow.minimize()
+
   })
   
 });
 app.on('keydown', function(event) {
   event.preventDefault()
-    const key = event.key; // "a", "1", "Shift", etc.
-    console.log(key)
+  console.log(key)
+    // const key = event.key; // "a", "1", "Shift", etc.
+    // console.log(key)
   });
+
+  app.on('will-quit', function() {
+  globalShortcut.unregisterAll();
+   
+    });
+
+  // app.on('desktop-capturer-get-sources', function(event,webContents) {
+  //   event.preventDefault()
+  //   console.log("hit cool")
+  //     // const key = event.key; // "a", "1", "Shift", etc.
+  //     // console.log(key)
+  //   });
 
 // Handle add item window
 function createAddWindow(){
