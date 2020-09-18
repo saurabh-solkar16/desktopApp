@@ -15,7 +15,7 @@ let addWindow;
 
 app.on('ready', function(){
   // Create new window,kiosk:true
-  mainWindow = new BrowserWindow({alwaysOnTop:true});
+  mainWindow = new BrowserWindow({alwaysOnTop:true,alwaysOnTop:true});
 
   // Load html in window
   mainWindow.loadURL(url.format({

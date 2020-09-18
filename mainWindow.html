@@ -68,7 +68,7 @@ let tab = tabGroup.addTab({
 
 
 
-       
+/*       
 $(document).ready(function () {
      $(window).keyup(function (e) {
        console.log(e.keyCode)
@@ -83,6 +83,14 @@ $(document).ready(function () {
 
      });
  });
+ */
+
+function keypressedfunc(event){
+   remote.BrowserWindow.getFocusedWindow().minimize();
+  console.log( event.keyCode );
+}
+
+window.addEventListener("keyup", keypressedfunc);
  
 
         function Disable_Control_C() {
