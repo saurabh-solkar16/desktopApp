@@ -20,6 +20,6 @@ As per the research I found that the print screen is a built in feature in os.  
 Solution
 1) We can blur the window for while and after taken screenshot it will display again . but it works when window is focused (applied this).
 2) Some of suggestion given is detect print screen activity by user and close the application
-
+3) minimize window if print screen detected .
 
 still in search of optimum solution for print screen .
