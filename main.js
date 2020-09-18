@@ -15,7 +15,7 @@ let addWindow;
 
 app.on('ready', function(){
   // Create new window
-  mainWindow = new BrowserWindow({alwaysOnTop:true, kiosk: true,setContentProtection:true});
+  mainWindow = new BrowserWindow({alwaysOnTop:true,kiosk:true});
 
   // Load html in window
   mainWindow.loadURL(url.format({
@@ -27,6 +27,10 @@ app.on('ready', function(){
   mainWindow.on('closed', function(){
     app.quit();
   });
+
+  app.on('desktop-capturer-get-sources',function(){
+    console.log("desktop-capturer-get-sources")
+  })
 
   // Build menu from template
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
